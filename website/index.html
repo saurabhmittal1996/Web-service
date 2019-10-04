@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146139105-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-146139105-1');
+    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 30px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+<script language="javascript">
+            
+            function setCookie(cname, cvalue, exdays){
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue +";path=/";
+  }
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  var user = getCookie("username");
+  if (user != "") {
+    window.open("http://www.saurabhmittal.site/index0.html", "_self");
+  }
+}
+window.onload = function() {
+  checkCookie();
+};
+            
+            function loginn(form)
+            {
+              var xhttp = new XMLHttpRequest();
+              var url = "http://3.82.74.116:5000/user/"+String(form.userid.value);
+              //url.concat(form.userid.value);
+              //url = "http://3.82.74.116:5000/user/saurabh"
+              xhttp.onreadystatechange = function()
+              {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                  // Typical action to be performed when the document is ready:
+                  //document.getElementById("demo").innerHTML = xhttp.responseText;
+                  var data = JSON.parse(xhttp.responseText);
+                  check(form, data.username, data.password);
+                }
+              };
+              xhttp.open("GET", url, true);
+              xhttp.send();
+            }
+            
+            function check(form, myuserid, mypswrd) 
+            {
+                //myuserid = "saurabh";
+                //mypswrd = "admin";
+                if(form.userid.value == myuserid && form.pswrd.value == mypswrd) 
+                {
+                    gtag('event', 'button', {'event_category': 'Login','event_label': 'Succesfully logged in'});
+                    setCookie("username", myuserid, 365);
+                    window.open('index0.html', '_self');/*opens the target page while Id & password matches*/
+                }
+                else 
+                {
+                    alert("Error Password or Username");/*displays error message*/
+                }
+            }
+</script>
+</head>
+<body>
+
+<h2>Login Form</h2>
+
+<form name = "login">
+  <div class="imgcontainer">
+    <img src="w3images/avatar.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    Username<input type="text" name="userid"/>
+    Password<input type="password" name="pswrd"/>
+    <input type="button" onclick="loginn(this.form); gtag('event', 'button', {'event_category': 'Login','event_label': 'Clicked login button'});" value="Login"/>
+    <input type="reset" value="Cancel"/>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <p><button class="cancelbtn" onclick="window.open('register.html','_self'); gtag('event', 'button', {'event_category': 'Register','event_label': 'Referred to register page'});" type="button"><b>Register</b></button></p>
+  </div>
+</form>
+
+</body>
+</html>

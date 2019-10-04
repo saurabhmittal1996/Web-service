@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146139105-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-146139105-1');
+    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 30px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+<script language="javascript">
+
+            function register(form)
+            {
+              var xhttp = new XMLHttpRequest();
+              var url = "http://3.82.74.116:5000/user";
+              const param = {password: String(document.querySelector('#loginPassword').value), username: String(document.querySelector('#loginEmail').value) };
+              //url.concat(form.userid.value);
+              //url = "http://3.82.74.116:5000/user/saurabh"
+              
+              xhttp.open("POST", url, true);
+              xhttp.setRequestHeader('Content-type', 'application/json');
+              xhttp.send(JSON.stringify(param));
+              alert(JSON.stringify(param))
+              xhttp.onload = function()
+              {
+                  gtag('event', 'button', {'event_category': 'Register','event_label': 'Succesfully Registered'});
+                  alert("Registered succesfully\nRedirecting to login page");
+                  window.open('index.html', '_blank');
+                  
+              };
+            }
+            
+            function check(form, myuserid, mypswrd) 
+            {
+                myuserid = "saurabh";
+                mypswrd = "admin";
+                if(form.userid.value == myuserid && form.pswrd.value == mypswrd) 
+                {
+                    window.open('index.html');/*opens the target page while Id & password matches*/
+                }
+                else 
+                {
+                    alert("Error Password or Username");/*displays error message*/
+                }
+            }
+</script>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+<h2>Register Form</h2>
+
+<form name = "registerform">
+  <div class="imgcontainer">
+    <img src="w3images/avatar.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    Username<input type="text" name="userid" id = "loginEmail"/>
+    Password<input type="password" name="pswrd" id ="loginPassword"/>
+    <input type="button" onclick="javascript:register(this.form); gtag('event', 'button', {'event_category': 'Register','event_label': 'Clicked on register button'});" value="Register"/>
+    <input type="reset" value="Cancel"/>
+  </div>
+
+</form>
+
+</body>
+</html>
